@@ -2,4 +2,3 @@
 [[ "$(uname -a)" = *"MINGW64"* ]] && exit 0
 . "$(dirname "$0")/_/husky.sh"
 
-exec < /dev/tty && pnpm cz --hook || true

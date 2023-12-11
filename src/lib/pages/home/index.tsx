@@ -1,10 +1,17 @@
+'use client';
 import { Flex } from '@chakra-ui/react';
+import ImageEditor from '~/lib/components/ImageEditor/ImageEditor';
 
-import CTASection from '~/lib/components/samples/CTASection';
-import SomeImage from '~/lib/components/samples/SomeImage';
-import SomeText from '~/lib/components/samples/SomeText';
+import './home.css';
+import { useState } from 'react';
+import LoginForm from '~/lib/components/auth/Login';
+import SignupForm from '~/lib/components/auth/Signup';
 
 const Home = () => {
+  const [activeScreen, setActiveScreen] = useState('login');
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    JSON.parse(localStorage.getItem('isLoggedIn') || 'false')
+  );
   return (
     <Flex
       direction="column"
@@ -15,9 +22,23 @@ const Home = () => {
       mb={8}
       w="full"
     >
-      <SomeText />
-      <SomeImage />
-      <CTASection />
+      {isLoggedIn ? (
+        <ImageEditor setIsLoggedIn={setIsLoggedIn} />
+      ) : (
+        <>
+          {activeScreen == 'login' ? (
+            <LoginForm
+              setActiveScreen={setActiveScreen}
+              setIsLoggedIn={setIsLoggedIn}
+            />
+          ) : (
+            <SignupForm
+              setActiveScreen={setActiveScreen}
+              setIsLoggedIn={setIsLoggedIn}
+            />
+          )}
+        </>
+      )}
     </Flex>
   );
 };

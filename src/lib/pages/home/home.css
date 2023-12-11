@@ -1,0 +1,5 @@
+.canvas {
+  width: 615px !important;
+  height: 600px !important;
+  object-fit: cover;
+}
